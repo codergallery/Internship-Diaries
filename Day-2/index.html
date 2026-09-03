@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Using internal CSS; just once for the hover effect on button -->
+    <style>
+      button:hover {
+        background-color: #3b82f6 !important;
+      }
+    </style>
+  </head>
+  <body
+    style="
+      background-color: #070e1d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    "
+  >
+    <div
+      class="container"
+      style="
+        border: 3px solid #26364d;
+        display: flex;
+        flex-direction: column;
+        background-color: #111928;
+        width: 80%;
+        height: 100vh;
+      "
+    >
+      <!-- Header section -->
+      <div
+        class="header"
+        style="display: flex; height: 25%"
+      >
+        <div
+          style="
+            display: flex;
+            width: 18%;
+            justify-content: center;
+            align-items: end;
+            padding-bottom: 20px;
+          "
+        >
+          <img
+            src="svgs/clipboard-pen.svg"
+            alt="clipboard-pen"
+            height="70%"
+            width="70%"
+          />
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            padding-left: 10px;
+          "
+        >
+          <p
+            style="
+              margin-bottom: 0;
+              font-size: 48px;
+              font-family: Inter;
+              font-weight: 700;
+              color: #F8FAFC;
+            "
+          >
+            REGISTRATION <span style="color: #2970FF;">FORM</span>
+          </p>
+          <p
+            style="
+              margin-top: 0;
+              font-size: 20px;
+              font-family: Inter;
+              font-weight: 400;
+              color: #A8B3C7;
+            "
+          >
+            Please fill in the details below to register with us!
+          </p>
+        </div>
+      </div>
+      <hr size="2" color="#26364D" width="95%" />
+
+      <!-- Form section -->
+      <div class="form-body" style="height: 75%">
+        <form style="height: 100%">
+          
+          <!-- Name and email -->
+          <div
+            style="
+              display: flex;
+              justify-content: space-around;
+              /* border: 2px solid blue; */
+              height: 20%;
+              padding: 10px 20px;
+            "
+          >
+            <div
+              style="
+                width: 50%;
+                /* border: 2px solid white; */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 30px;
+              "
+            >
+              <label
+                for="name"
+                style="
+                  color: white;
+                  font-size: 18px;
+                  font-family: Inter;
+                  font-weight: 500;
+                "
+                ><div style="padding-bottom: 10px">
+                  <img
+                    src="svgs/user-round.svg"
+                    alt="user-round-icon"
+                    style="padding-right: 10px"
+                  />Name
+                </div></label
+              >
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                style="
+                  font-size: 17px;
+                  width: 40%;
+                  font-family: Inter;
+                  font-weight: 400;
+                  background-color: #091321;
+                  width: 90%;
+                  padding: 12px;
+                  color: #a8b3c7;
+                  border-radius: 4px;
+                  border: 2px #26364D;
+                "
+              />
+            </div>
+            <div
+              style="
+                width: 50%;
+                /* border: 2px solid white; */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 30px;
+              "
+            >
+              <label
+                for="email"
+                style="
+                  color: white;
+                  font-size: 18px;
+                  font-family: Inter;
+                  font-weight: 500;
+                "
+                ><div style="padding-bottom: 10px">
+                  <img
+                    src="svgs/mail.svg"
+                    alt="user-round-icon"
+                    style="padding-right: 10px"
+                  />Email
+                </div></label
+              >
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                style="
+                  font-size: 17px;
+                  width: 40%;
+                  font-family: Inter;
+                  font-weight: 400;
+                  background-color: #091321;
+                  width: 90%;
+                  padding: 12px;
+                  color: #a8b3c7;
+                  border-radius: 4px;
+                  border: 2px #26364D;
+                "
+              />
+            </div>
+          </div>
+
+          <!-- Password and gender -->
+          <div
+            style="
+              display: flex;
+              justify-content: space-around;
+              /* border: 2px solid blue; */
+              height: 20%;
+              padding: 10px 20px;
+            "
+          >
+            <div
+              style="
+                width: 50%;
+                /* border: 2px solid white; */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 30px;
+              "
+            >
+              <label
+                for="password"
+                style="
+                  color: white;
+                  font-size: 18px;
+                  font-family: Inter;
+                  font-weight: 500;
+                "
+                ><div style="padding-bottom: 10px">
+                  <img
+                    src="svgs/lock-keyhole.svg"
+                    alt="user-round-icon"
+                    style="padding-right: 10px"
+                  />Password
+                </div></label
+              >
+              <input
+                type="password"
+                placeholder="Create a password"
+                style="
+                  font-size: 17px;
+                  width: 40%;
+                  font-family: Inter;
+                  font-weight: 400;
+                  background-color: #091321;
+                  width: 90%;
+                  padding: 12px;
+                  color: #a8b3c7;
+                  border-radius: 4px;
+                  border: 2px #26364D;
+                "
+              />
+            </div>
+            <div
+              style="
+                width: 50%;
+                /* border: 2px solid white; */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 30px;
+              "
+            >
+              <label
+                for="gender"
+                style="
+                  color: white;
+                  font-size: 18px;
+                  font-family: Inter;
+                  font-weight: 500;
+                "
+                ><div style="padding-bottom: 15px">
+                  <img
+                    src="svgs/user-round.svg"
+                    alt="user-round-icon"
+                    style="padding-right: 10px"
+                  />Gender
+                </div></label
+              >
+              <select
+                name="gender"
+                style="
+                  font-size: 17px;
+                  background-color: #091321;
+                  width: 95%;
+                  padding: 12px;
+                  color: #a8b3c7;
+                  border-radius: 4px;
+                  border: 2px #26364D;
+                "
+              >
+                <option value="" selected disabled >Select your gender</option>
+                <option value="male">Male</option>
+                <option value="male">Female</option>
+                <option value="others">Others</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Department -->
+          <div
+            style="
+              display: flex;
+              /* border: 2px solid blue; */
+              height: 20%;
+              padding: 10px 20px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                padding-left: 30px;
+              "
+            >
+              <label
+                for="department"
+                style="
+                  color: #fff;
+                  font-size: 18px;
+                  font-family: Inter;
+                  font-weight: 500;
+                "
+                ><div style="padding-bottom: 15px">
+                  <img
+                    src="svgs/building-2.svg"
+                    alt="user-round-icon"
+                    style="padding-right: 10px"
+                  />Department
+                </div></label
+              >
+              <select
+                name="department"
+                style="
+                  font-size: 17px;
+                  width: 100%;
+                  background-color: #091321;
+                  width: 97.5%;
+                  padding: 12px;
+                  color: #a8b3c7;
+                  border-radius: 4px;
+                  border: 2px #26364D;
+                "
+              >
+                <option value="" selected disabled>Select your department</option>
+                <option value="CSE">Computer Science & Engineering</option>
+                <option value="MNC">Mathematics & Computing</option>
+                <option value="ECE">
+                  Electronics and Communication Engineering
+                </option>
+                <option value="EE">Electrical Engineering</option>
+                <option value="ME">Mechanical Engineering</option>
+                <option value="CE">Civil Engineering</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- T&C and submit -->
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: start;
+              color: #fff;
+              /* border: 2px solid blue; */
+              height: 25%;
+              justify-content: center;
+              padding: 10px 20px;
+              padding-left: 50px;
+            "
+          >
+            <div style="padding-bottom: 12px">
+              <input
+                type="checkbox"
+                style="font-size: 16px; font-family: Inter; font-weight: 400; accent-color:#2563eb;"
+              />
+              I agree to
+              <span
+                ><a
+                  href="https://example.com"
+                  target="_blank"
+                  style="color: #3b82f6"
+                  >terms and conditions</a
+                ></span
+              >
+            </div>
+            <button
+              type="submit"
+              style="
+                width: 97.5%;
+                font-size: 20px;
+                font-family: Inter;
+                font-weight: 600;
+                background-color: #2563eb;
+                color: #f8fafc;
+                border: none;
+                border-radius: 8px;
+                padding: 12px 0px;
+              "
+            >
+              <div>
+                <img
+                  src="svgs/send.svg"
+                  alt="user-round-icon"
+                  style="padding-right: 5px"
+                />Submit
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
