@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1 id="title">0</h1>
+    </center>
+    <button onclick="increment()">Increment</button>
+    <button onclick="decrement()">Decrement</button>
+
+    <script>
+        function increment() {
+            let value = Number(document.getElementById("title").innerHTML);
+            value = value + 1;
+            document.getElementById("title").innerHTML = value;
+        }
+        
+        function decrement() {
+            let value = Number(document.getElementById("title").innerHTML);
+            value = value - 1;
+            document.getElementById("title").innerHTML = value;
+        }
+    </script>
+</body>
+</html>

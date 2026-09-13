@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote-2</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #202632;
+        font-family: Arial, sans-serif;
+        color: white;
+      }
+
+      .quote-box {
+        width: 65%;
+        min-height: 60%;
+        padding: 50px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        background-color: #11161f;
+        border-radius: 18px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      #quote {
+        margin: 0;
+        max-width: 850px;
+        text-align: center;
+        font-size: 32px;
+        line-height: 1.4;
+      }
+
+      #author {
+        margin: 0;
+        color: #aeb9cc;
+        font-size: 18px;
+      }
+
+      button {
+        margin-top: 15px;
+        padding: 13px 28px;
+
+        background-color: #2878f0;
+        color: white;
+
+        border: none;
+        border-radius: 8px;
+
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #1766d8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="quote-box">
+      <div>
+        <h1 id="quote">Random quote</h1>
+      </div>
+
+      <div>
+        <p id="author">- Author</p>
+      </div>
+
+      <button onclick="generateQuote()">Generate quote</button>
+    </div>
+
+    
+    <script>
+      async function generateQuote() {
+        const result = await fetch(
+          "https://quoteslate.vercel.app/api/quotes/random",
+        );
+        const data = await result.json();
+
+        document.getElementById("quote").innerHTML = data.quote;
+        document.getElementById("author").innerHTML = data.author;
+      }
+    </script>
+  </body>
+</html>
