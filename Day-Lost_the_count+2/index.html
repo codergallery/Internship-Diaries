@@ -76,7 +76,7 @@
             <h2 class="section-title">CITY <span>SPOTLIGHT</span></h2>
             <div class="spotlight-grid">
                 <div class="spotlight-large" style="background-color: #fff; border-radius: 8px; padding: 2rem; text-align: center;">
-                    <img src="https://www.soccerbox.com/media/catalog/product/cache/e5c18d5f608fefb2b3ef83fcb1922b34/m/a/man-city-home-shirt-24.jpg" alt="Manchester City Home Kit" style="max-height: 400px; object-fit: contain;">
+                    <img src="assets/images/jerseys/man-city-home-24-25.jpg" alt="Manchester City Home Kit" style="max-height: 400px; object-fit: contain;">
                 </div>
                 <div class="spotlight-details">
                     <div style="background: var(--accent-color); color: #fff; display: inline-block; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; margin-bottom: 1rem;">HERO PRODUCT</div>
@@ -158,8 +158,10 @@
                     p.team.toLowerCase().includes(query)
                 );
                 if (catalogueTitle) {
-                    catalogueTitle.innerHTML = `Search Results for "<span style="color: var(--accent-color);">${searchQuery}</span>"`;
+                    catalogueTitle.innerHTML = `Search Results for "<span style="color: var(--accent-color);">${searchQuery}</span>" <a href="index.html#catalogue" style="font-size: 1rem; margin-left: 1rem; text-decoration: underline; color: var(--text-secondary);">Clear Search</a>`;
                 }
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) searchInput.value = searchQuery;
             } else {
                 // Render all products from the data.js file
                 // City products are listed first inherently in our data.js, but we can make sure of it here.
