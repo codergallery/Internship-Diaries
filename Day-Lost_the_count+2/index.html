@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HALFTIME STORE | The Football Merch Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .nav-cart-count { transition: transform 0.2s; }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--surface-color);
+            border-left: 4px solid var(--accent-color);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">HALFTIME<span style="color: var(--accent-color);">.</span></a>
+            <nav class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="#city-spotlight" style="color: var(--accent-color);">City Spotlight</a>
+                <a href="#catalogue">Catalogue</a>
+            </nav>
+            <div class="nav-icons" style="align-items: center;">
+                <form id="search-form" class="search-form">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search..." maxlength="50">
+                    <button type="submit" style="color: inherit; margin-left: 8px;"><i class="fas fa-search"></i></button>
+                </form>
+                <a href="checkout.html" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count nav-cart-count" id="nav-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(to right, rgba(15, 16, 18, 0.95), rgba(15, 16, 18, 0.6)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Etihad_Stadium_wide_view.jpg/1920px-Etihad_Stadium_wide_view.jpg') center/cover;">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-subtitle">MANCHESTER CITY</span>
+                <h1 class="hero-title">DEFEND THE CROWN</h1>
+                <p style="margin-bottom: 2rem; font-size: 1.1rem; max-width: 450px;">The champions return. Discover the official 2024/25 Manchester City home kit, designed for peak performance and ultimate fan pride.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="product.html?id=mc-01" class="btn btn-accent">Shop City Home</a>
+                    <a href="#catalogue" class="btn btn-outline">Explore All Jerseys</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- City Spotlight -->
+    <section class="city-spotlight" id="city-spotlight">
+        <div class="container">
+            <h2 class="section-title">CITY <span>SPOTLIGHT</span></h2>
+            <div class="spotlight-grid">
+                <div class="spotlight-large" style="background-color: #fff; border-radius: 8px; padding: 2rem; text-align: center;">
+                    <img src="https://www.soccerbox.com/media/catalog/product/cache/e5c18d5f608fefb2b3ef83fcb1922b34/m/a/man-city-home-shirt-24.jpg" alt="Manchester City Home Kit" style="max-height: 400px; object-fit: contain;">
+                </div>
+                <div class="spotlight-details">
+                    <div style="background: var(--accent-color); color: #fff; display: inline-block; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; margin-bottom: 1rem;">HERO PRODUCT</div>
+                    <h2>MANCHESTER CITY HOME 24/25</h2>
+                    <p>Woven from the threads of history. The latest City kit honors Manchester's iconic 0161 area code, proudly embedded in the collar.</p>
+                    <a href="product.html?id=mc-01" class="btn btn-primary" style="background-color: var(--accent-color); color: #fff;">Buy Now - ₹5,999</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Catalogue -->
+    <section class="latest-drops" id="catalogue">
+        <div class="container">
+            <h2 class="section-title">OUR <span>CATALOGUE</span></h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem; max-width: 600px; margin-inline: auto;">Explore our curated selection of authentic football jerseys from the biggest clubs across Europe.</p>
+            
+            <div class="product-grid" id="all-products">
+                <!-- Products will be injected here via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo">HALFTIME<span style="color: var(--accent-color);">.</span></a>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Your ultimate destination for authentic football merchandise. A football store first, with Manchester City as our star.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>SHOP</h4>
+                    <ul>
+                        <li><a href="#city-spotlight" style="color: var(--accent-color);">City Collection</a></li>
+                        <li><a href="#catalogue">All Jerseys</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>SUPPORT</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>FOLLOW US</h4>
+                    <div style="display: flex; gap: 1rem; font-size: 1.5rem; color: var(--text-secondary);">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 HALFTIME STORE.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('all-products');
+            const catalogueTitle = document.querySelector('#catalogue .section-title');
+            
+            // Get search query if it exists
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            
+            let displayProducts = [...products];
+            
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                displayProducts = displayProducts.filter(p => 
+                    p.name.toLowerCase().includes(query) || 
+                    p.team.toLowerCase().includes(query)
+                );
+                if (catalogueTitle) {
+                    catalogueTitle.innerHTML = `Search Results for "<span style="color: var(--accent-color);">${searchQuery}</span>"`;
+                }
+            } else {
+                // Render all products from the data.js file
+                // City products are listed first inherently in our data.js, but we can make sure of it here.
+                displayProducts.sort((a, b) => {
+                    if (a.team === 'Manchester City' && b.team !== 'Manchester City') return -1;
+                    if (b.team === 'Manchester City' && a.team !== 'Manchester City') return 1;
+                    return 0;
+                });
+            }
+            
+            if (displayProducts.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem 0;"><h3>No products found matching your search.</h3><a href="index.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">View All Products</a></div>';
+            } else {
+                renderProducts(displayProducts, container);
+            }
+        });
+    </script>
+</body>
+</html>

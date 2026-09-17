@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | HALFTIME STORE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product-detail-container {
+            margin-top: calc(var(--nav-height) + 2rem);
+            margin-bottom: 4rem;
+        }
+        
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .product-gallery {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-gallery img {
+            width: 100%;
+            max-width: 500px;
+            object-fit: contain;
+        }
+        
+        .product-info-panel h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-team-subtitle {
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .price-block {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .price-block .original {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .selection-group {
+            margin-bottom: 2rem;
+        }
+        
+        .selection-group h4 {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+        
+        .size-grid {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .size-btn {
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .size-btn:hover {
+            border-color: var(--text-primary);
+        }
+        
+        .size-btn.selected {
+            background-color: var(--text-primary);
+            color: var(--bg-color);
+            border-color: var(--text-primary);
+        }
+
+        .size-btn.selected-city {
+            background-color: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid var(--border-color);
+            width: max-content;
+            border-radius: 4px;
+            background: var(--surface-color);
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+        }
+        
+        .qty-btn:hover {
+            background-color: var(--border-color);
+        }
+        
+        .qty-value {
+            font-size: 1rem;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        
+        .product-meta {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        
+        .product-meta p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .product-meta span {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .city-theme .product-team-subtitle {
+            color: var(--accent-color);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--surface-color);
+            border-left: 4px solid var(--success-color);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">HALFTIME<span style="color: var(--accent-color);">.</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#catalogue">Catalogue</a>
+            </nav>
+            <div class="nav-icons" style="align-items: center;">
+                <form id="search-form" class="search-form">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search..." maxlength="50">
+                    <button type="submit" style="color: inherit; margin-left: 8px;"><i class="fas fa-search"></i></button>
+                </form>
+                <a href="checkout.html" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="nav-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container product-detail-container" id="product-container">
+        <!-- Injected via JS -->
+    </div>
+
+    <!-- Related Products -->
+    <section style="background-color: var(--surface-color); margin-top: 4rem;">
+        <div class="container">
+            <h2 class="section-title" style="text-align: left;">YOU MIGHT ALSO <span>LIKE</span></h2>
+            <div class="product-grid" id="related-products">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>&copy; 2026 HALFTIME STORE..</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="action-toast">
+        <strong id="action-title">Success</strong>
+        <p id="action-msg" style="margin-top: 5px; font-size: 0.9rem;"></p>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/product.js"></script>
+    <script>
+    </script>
+</body>
+</html>
