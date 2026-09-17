@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | HALFTIME STORE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .checkout-container {
+            margin-top: calc(var(--nav-height) + 2rem);
+            margin-bottom: 4rem;
+        }
+        
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .checkout-form-section {
+            background-color: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .checkout-summary-section {
+            background-color: var(--surface-color);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: calc(var(--nav-height) + 2rem);
+        }
+        
+        h2.checkout-title {
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .cart-item-sm {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item-sm img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 4px;
+        }
+
+        .cart-item-sm-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-sm-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .cart-item-sm-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.2rem;
+        }
+
+        .summary-totals {
+            margin-top: 1.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-row.grand-total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+        }
+
+        .success-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 16, 18, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-overlay.show {
+            display: flex;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            padding: 3rem 0;
+            grid-column: 1 / -1;
+        }
+
+        /* Two-step checkout */
+        #payment-section {
+            display: none;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, max-height 0.5s ease;
+        }
+
+        #payment-section.visible {
+            display: block;
+            opacity: 1;
+            max-height: 600px;
+            overflow: visible;
+        }
+
+        .step-completed {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--success-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-completed.show {
+            display: flex;
+        }
+
+        #shipping-fields.collapsed .form-group,
+        #shipping-fields.collapsed .form-row {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">HALFTIME<span style="color: var(--accent-color);">.</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#catalogue">Catalogue</a>
+            </nav>
+            <div class="nav-icons" style="align-items: center;">
+                <form id="search-form" class="search-form">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search..." maxlength="50">
+                    <button type="submit" style="color: inherit; margin-left: 8px;"><i class="fas fa-search"></i></button>
+                </form>
+                <a href="checkout.html" class="cart-icon active">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="nav-cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container checkout-container">
+        <h1 class="section-title" style="text-align: left;">CHECKOUT</h1>
+        
+        <div class="checkout-layout" id="checkout-content">
+            <!-- Form Section -->
+            <div class="checkout-form-section">
+                <form id="checkout-form" novalidate>
+                    
+                    <!-- Step 1: Shipping -->
+                    <h2 class="checkout-title">1. Shipping Address</h2>
+                    <div class="step-completed" id="shipping-done">
+                        <i class="fas fa-check-circle"></i> Shipping details confirmed
+                    </div>
+                    
+                    <div id="shipping-fields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" id="fname" required placeholder="John">
+                                <div class="error-msg" id="err-fname">Letters only, 2–50 characters.</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" id="lname" required placeholder="Doe">
+                                <div class="error-msg" id="err-lname">Letters only, 2–50 characters.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" id="email" required placeholder="john@example.com">
+                                <div class="error-msg" id="err-email">Enter a valid email address.</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" required placeholder="9876543210" maxlength="10">
+                                <div class="error-msg" id="err-phone">Enter a valid 10-digit Indian mobile number.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Street Address</label>
+                            <input type="text" class="form-control" id="address" required placeholder="123 Football Avenue, Sector 5" maxlength="150">
+                            <div class="error-msg" id="err-address">10–150 characters. Letters, numbers, spaces, commas, periods, hyphens, /.</div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" id="city" required placeholder="Mumbai">
+                                <div class="error-msg" id="err-city">Letters only, 2–50 characters.</div>
+                            </div>
+                            <div class="form-group">
+                                <label>PIN Code</label>
+                                <input type="text" class="form-control" id="pincode" required placeholder="400001" maxlength="6">
+                                <div class="error-msg" id="err-pincode">Enter a valid 6-digit PIN code.</div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary btn-checkout" id="continue-to-payment">
+                            CONTINUE TO PAYMENT <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                        </button>
+                    </div>
+
+                    <!-- Step 2: Payment (hidden initially) -->
+                    <div id="payment-section">
+                        <h2 class="checkout-title" style="margin-top: 2rem;">2. Payment Details</h2>
+                        
+                        <div class="form-group">
+                            <label>Name on Card</label>
+                            <input type="text" class="form-control" id="cname" required placeholder="John Doe">
+                            <div class="error-msg" id="err-cname">Letters and spaces only, 2–50 characters.</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" class="form-control" id="cnum" required placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric">
+                            <div class="error-msg" id="err-cnum">Enter exactly 16 digits.</div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <input type="text" class="form-control" id="cexp" required placeholder="MM / YY" maxlength="7" inputmode="numeric">
+                                <div class="error-msg" id="err-cexp">Enter a valid future date (MM / YY).</div>
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="password" class="form-control" id="ccvv" required placeholder="123" maxlength="3" inputmode="numeric">
+                                <div class="error-msg" id="err-ccvv">Enter exactly 3 digits.</div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-checkout">PLACE ORDER</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="checkout-summary-section">
+                <h2 class="checkout-title">Order Summary</h2>
+                <div id="checkout-items">
+                    <!-- Populated via JS -->
+                </div>
+                
+                <div class="form-group" style="margin-top: 2rem;">
+                    <label>Coupon Code (Optional)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" class="form-control" id="coupon" placeholder="CITY26" maxlength="20">
+                        <button type="button" class="btn btn-outline" id="apply-coupon" style="padding: 0.5rem 1rem; white-space: nowrap;">Apply</button>
+                    </div>
+                    <div class="error-msg" id="err-coupon">Invalid coupon code.</div>
+                    <div style="color: var(--success-color); font-size: 0.8rem; margin-top: 0.3rem; display: none;" id="succ-coupon"></div>
+                </div>
+
+                <div class="summary-totals" id="checkout-totals">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="success-overlay">
+        <i class="fas fa-check-circle success-icon"></i>
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Order Confirmed!</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 400px;">Thank you for shopping at HALFTIME STORE. Your premium football gear will be shipped shortly.</p>
+        <a href="index.html" class="btn btn-accent">Return to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>&copy; 2026 HALFTIME STORE.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>
