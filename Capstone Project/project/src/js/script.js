@@ -8,24 +8,26 @@ function renderCars(carList) {
   if (carList.length === 0) {
     carsHTML = [
       `<div class="flex flex-col items-center justify-center rounded-xl border border-grayish-border bg-dark-secondary p-8 text-center">
-  <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dark-bg text-secondary">
-    <!-- icon here -->
+  <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-dark-bg text-xl text-secondary">
+    🔍
   </div>
 
   <h3 class="text-lg font-semibold text-secondary">
     No vehicles found
   </h3>
+
+  <p class="mt-1 text-sm text-secondary">Try clearing some filters.</p>
 </div>`,
     ];
   } else {
     carsHTML = carList.map(function (car) {
       return `
       <div
-        class="flex items-center gap-5 rounded-xl border border-grayish-border bg-dark-secondary p-4 transition hover:border-accent/50"
+        class="flex flex-col gap-5 md:flex-row md:items-center rounded-xl border border-grayish-border bg-dark-secondary p-4 transition hover:border-accent/50"
       >
   
         <!-- Car Image -->
-        <div class="h-32 w-56 shrink-0 overflow-hidden rounded-lg bg-dark-bg">
+        <div class="h-44 w-full md:h-32 md:w-56 shrink-0 overflow-hidden rounded-lg bg-dark-bg">
           <img
             src="${car.image}"
             alt="${car.name}"
@@ -52,14 +54,14 @@ function renderCars(carList) {
   
         <!-- Price + Button -->
         <div
-          class="flex w-40 shrink-0 flex-col items-start border-l border-grayish-border pl-5"
+          class="flex w-full shrink-0 flex-col items-start border-t border-grayish-border pt-4 md:w-40 md:border-t-0 md:border-l md:pt-0 md:pl-5"
         >
           <p class="text-xs text-secondary">
             Daily rate
           </p>
   
           <p class="mt-1 text-2xl font-semibold">
-            ₹${car.price}
+            ₹${car.price.toLocaleString("en-IN")}
             <span class="text-sm font-normal text-secondary">
               / day
             </span>
@@ -119,6 +121,7 @@ const sortCars = document.querySelector("#sort");
 
 // available cars
 const availableCars = document.querySelector("#available-cars");
+const resultsCount = document.querySelector("#results-count");
 
 // filter cars
 function applyFilters() {
@@ -212,6 +215,7 @@ function applyFilters() {
   }
   renderCars(filteredCars);
   availableCars.textContent = filteredCars.length;
+  resultsCount.textContent = `${filteredCars.length} vehicles available`;
 }
 
 // checkbox eventlistener
@@ -223,7 +227,7 @@ filterCheckboxes.forEach(function (checkbox) {
 
 // price range event listener
 priceRange.addEventListener("input", function () {
-  priceValue.textContent = `₹${Number(priceRange.value)}`;
+  priceValue.textContent = `₹${Number(priceRange.value).toLocaleString("en-IN")}`;
   applyFilters();
 });
 
@@ -237,7 +241,7 @@ clearFilters.addEventListener("click", function () {
     checkbox.checked = false;
   });
   priceRange.value = 9000;
-  priceValue.textContent = `₹${priceRange.value}`;
+  priceValue.textContent = `₹${Number(priceRange.value).toLocaleString("en-IN")}`;
   searchInput.value = "";
   applyFilters();
 });

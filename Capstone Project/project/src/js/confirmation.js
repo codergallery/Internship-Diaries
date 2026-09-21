@@ -17,7 +17,7 @@ if (bookingData) {
 
   // Daily price
   document.querySelector("#confirmation-daily-price").textContent =
-    `₹${booking.dailyPrice}`;
+    `₹${booking.dailyPrice.toLocaleString("en-IN")}`;
 
   // Pickup
   document.querySelector("#confirmation-pickup-date").textContent =
@@ -44,10 +44,10 @@ if (bookingData) {
     `${booking.duration} days`;
 
   document.querySelector("#confirmation-total-price").textContent =
-    `₹${booking.totalPrice}`;
+    `₹${booking.totalPrice.toLocaleString("en-IN")}`;
 
   document.querySelector("#confirmation-advance").textContent =
-    `Advance Paid: ₹${booking.advanceAmount}`;
+    `Advance Paid: ₹${booking.advanceAmount.toLocaleString("en-IN")}`;
 
   // Email
   document.querySelector("#confirmation-email").textContent = booking.email;

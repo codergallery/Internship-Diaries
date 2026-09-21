@@ -47,12 +47,12 @@ function createCardHTML(car, isActive) {
   let imageClasses = "";
 
   if (isActive) {
-    // full width on phones, 50% on md screens and up
-    cardClasses += "w-full md:w-[50%]";
+    // one big card on phones and tablets, 50% wide on lg screens and up
+    cardClasses += "w-full max-w-xl lg:max-w-none lg:w-[50%]";
     imageClasses = "object-cover";
   } else {
-    // side cards are hidden on phones, shown from md screens and up
-    cardClasses += "hidden md:block w-[25%] h-[70%] opacity-70";
+    // side cards are hidden on phones and tablets, shown from lg screens and up
+    cardClasses += "hidden lg:block w-[25%] h-[70%] opacity-70";
     imageClasses = "h-52 w-full object-cover";
   }
 
@@ -65,14 +65,14 @@ function createCardHTML(car, isActive) {
             <p class="text-lg font-medium">${car.name}</p>
             <p class="text-secondary text-[13px] font-medium">${car.type}</p>
             <p class="text-lg font-medium">
-              &#8377; ${car.price}<span class="text-secondary text-[13px] font-medium"> /day</span>
+              &#8377; ${car.price.toLocaleString("en-IN")}<span class="text-secondary text-[13px] font-medium"> /day</span>
             </p>
           </div>
         </div>
         <div class="bg-dark-secondary w-full flex items-center justify-end pr-8">
-          <button>
+          <a href="cars.html" aria-label="View all cars">
             <img src="assets/images/circle-arrow-right-svgrepo-com.svg" alt="" class="h-10" />
-          </button>
+          </a>
         </div>
       </div>
     </div>
