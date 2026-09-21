@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DRIVEON — Booking Confirmed</title>
+
+    <link rel="stylesheet" href="output.css" />
+  </head>
+
+  <body class="min-h-screen bg-dark-bg text-white">
+
+    <!-- Navbar -->
+    <header>
+      <nav
+        class="nav-bar relative mt-2 flex h-15 w-[98%] items-center justify-between rounded-2xl border border-gray-600 bg-dark-bg px-6 left-1/2 -translate-x-1/2 z-10"
+      >
+
+        <!-- Logo -->
+        <div class="logo font-bold">
+          <p class="text-3xl">
+            <span>DRIVE</span><span class="text-accent">ON</span>
+          </p>
+        </div>
+
+
+        <!-- Navigation -->
+        <div class="navigation flex gap-10">
+
+          <a href="index.html" class="text-slate-300">
+            Home
+          </a>
+
+        </div>
+
+
+        <!-- Profile -->
+        <div class="profile flex gap-2">
+
+          <img
+            src="assets/images/circled-user-svgrepo-com.svg"
+            alt="user icon"
+            class="h-9"
+          />
+
+          <p class="mt-1">
+            Profile
+          </p>
+
+          <img
+            src="assets/images/dropdown-arrow-svgrepo-com.svg"
+            alt="dropdown button"
+            class="h-8 pt-2"
+          />
+
+        </div>
+
+      </nav>
+    </header>
+
+    <!-- Confirmation -->
+    <main class="mx-auto max-w-5xl px-6 pb-16 pt-16">
+
+      <!-- Success Header -->
+      <section class="text-center">
+
+        <!-- Success Icon -->
+        <div
+          class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-3xl font-bold text-dark-bg"
+        >
+          ✓
+        </div>
+
+
+        <h1 class="mt-5 text-4xl font-bold tracking-tight">
+          Booking Confirmed!
+        </h1>
+
+        <p class="mt-2 text-sm text-secondary">
+          Your vehicle has been successfully reserved.
+        </p>
+
+
+        <!-- Booking ID -->
+        <div
+          class="mx-auto mt-5 w-fit min-w-64 rounded-lg border border-grayish-border bg-dark-secondary px-8 py-3"
+        >
+
+          <p class="text-sm text-secondary">
+            Booking ID
+          </p>
+
+          <div class="mt-1 flex items-center justify-center gap-4">
+
+            <p
+              id="booking-id"
+              class="text-base font-semibold"
+            >
+              —
+            </p>
+
+            <button
+              id="copy-booking-id"
+              type="button"
+              class="text-secondary transition hover:text-white"
+              title="Copy booking ID"
+            >
+              ⧉
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Booking Card -->
+      <section
+        id="booking-details"
+        class="mt-10 overflow-hidden rounded-xl border border-grayish-border bg-dark-secondary"
+      >
+
+        <!-- Vehicle Header -->
+        <div
+          class="flex items-center justify-between gap-5 border-b border-grayish-border p-4"
+        >
+
+          <div class="flex items-center gap-4">
+
+            <div class="h-20 w-32 overflow-hidden rounded-lg bg-dark-bg">
+
+              <img
+                id="confirmation-car-image"
+                src=""
+                alt=""
+                class="h-full w-full object-cover"
+              />
+
+            </div>
+
+
+            <div>
+
+              <h2
+                id="confirmation-car-name"
+                class="text-2xl font-semibold"
+              >
+                —
+              </h2>
+
+              <p
+                id="confirmation-car-type"
+                class="mt-1 text-xs text-secondary"
+              >
+                —
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="text-right">
+
+            <p
+              id="confirmation-daily-price"
+              class="text-2xl font-semibold"
+            >
+              —
+            </p>
+
+            <p class="text-sm text-secondary">
+              / day
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Rental Information -->
+        <div class="grid grid-cols-4">
+
+          <!-- Pickup -->
+          <div
+            class="border-r border-grayish-border p-4"
+          >
+
+            <p class="text-sm text-secondary">
+              Pickup
+            </p>
+
+            <p
+              id="confirmation-pickup-date"
+              class="mt-2 text-sm font-medium"
+            >
+              —
+            </p>
+
+            <p
+              id="confirmation-pickup-time"
+              class="mt-2 text-xs text-secondary"
+            >
+              —
+            </p>
+
+            <p
+              id="confirmation-pickup-location"
+              class="mt-2 text-xs text-secondary"
+            >
+              —
+            </p>
+
+          </div>
+
+
+          <!-- Drop-off -->
+          <div
+            class="border-r border-grayish-border p-4"
+          >
+
+            <p class="text-sm text-secondary">
+              Drop-off
+            </p>
+
+            <p
+              id="confirmation-dropoff-date"
+              class="mt-2 text-sm font-medium"
+            >
+              —
+            </p>
+
+            <p
+              id="confirmation-dropoff-time"
+              class="mt-2 text-xs text-secondary"
+            >
+              —
+            </p>
+
+            <p
+              id="confirmation-dropoff-location"
+              class="mt-2 text-xs text-secondary"
+            >
+              —
+            </p>
+
+          </div>
+
+
+          <!-- Duration -->
+          <div
+            class="border-r border-grayish-border p-4"
+          >
+
+            <p class="text-sm text-secondary">
+              Duration
+            </p>
+
+            <p
+              id="confirmation-duration"
+              class="mt-2 text-xl font-semibold"
+            >
+              —
+            </p>
+
+          </div>
+
+
+          <!-- Total -->
+          <div class="p-4">
+
+            <p class="text-sm text-secondary">
+              Estimated Total
+            </p>
+
+            <p
+              id="confirmation-total-price"
+              class="mt-2 text-xl font-semibold"
+            >
+              —
+            </p>
+
+            <span
+              id="confirmation-advance"
+              class="mt-2 inline-block rounded-md border border-accent px-2 py-1 text-[10px] font-medium text-accent"
+            >
+              Advance Paid: —
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Confirmation Email -->
+      <div class="mt-5 flex items-center justify-center gap-2 text-center">
+
+        <span class="text-accent">
+          ✉
+        </span>
+
+        <p class="text-sm text-secondary">
+          A confirmation has been sent to
+          <span
+            id="confirmation-email"
+            class="font-medium text-white"
+          >
+            —
+          </span>
+        </p>
+
+      </div>
+
+
+      <!-- Actions -->
+      <div class="mt-6 flex justify-center gap-4">
+
+        <a
+          href="index.html"
+          class="rounded-lg border border-grayish-border px-8 py-3 text-sm font-semibold transition hover:border-gray-500"
+        >
+          Back to Home
+        </a>
+
+      </div>
+
+    </main>
+
+
+    <!-- footer -->
+    <footer class="border-y border-y-gray-700 mt-8 px-4 py-2">
+      <div class="grid grid-cols-3">
+        <div class="logo font-bold">
+          <p class="text-2xl">
+            <span>DRIVE</span><span class="text-accent">ON</span>
+          </p>
+
+          <p class="text-secondary font-medium">
+            Better drives, brighter journeys.
+          </p>
+        </div>
+        <div class="flex flex-col items-center gap-5">
+          <p class="text-2xl text-gray-500">COMPANY</p>
+          <div
+            class="flex flex-col items-center text-sm font-md text-gray-500 gap-2"
+          >
+            <a href="#">Home</a>
+            <a href="#">Cars</a>
+            <a href="#">About</a>
+            <a href="#">How it works</a>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-5">
+          <p class="text-2xl text-gray-500">SUPPORT</p>
+          <div
+            class="flex flex-col items-center text-sm font-md text-gray-500 gap-2"
+          >
+            <a href="#">Contact Us</a>
+            <a href="#">FAQs</a>
+            <a href="#">Terms & Conditions</a>
+          </div>
+        </div>
+      </div>
+      <hr class="border-gray-700 mt-4" />
+      <div class="flex justify-between px-2 pt-3 text-gray-500">
+        <p>&copy; 2026 Mayank</p>
+        <div class="flex justify-between w-1/3">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms and Conditions</a>
+          <div class="flex w-1/3 justify-between">
+            <a href="">
+              <img
+                src="./assets/images/instagram.svg"
+                alt="instagram"
+                class="h-6"
+              />
+            </a>
+            <a href="">
+              <img
+                src="assets/images/linkedin.svg"
+                alt="linkedin"
+                class="h-6"
+              />
+            </a>
+            <a href="">
+              <img src="assets/images/twitter.svg" alt="x" class="h-6" />
+            </a>
+            <a href="">
+              <img src="assets/images/reddit.svg" alt="reddit" class="h-6" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <script src="js/confirmation.js"></script>
+
+  </body>
+</html>

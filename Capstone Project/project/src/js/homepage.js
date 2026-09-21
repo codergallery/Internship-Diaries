@@ -19,10 +19,10 @@ document
     window.location.href = "cars.html";
   });
 
-  // pickupDate validation
+// pickupDate validation
 const pickupDateInput = document.querySelector("#pickup-date");
 const today = new Date().toISOString().split("T")[0];
-pickupDateInput.min = today
+pickupDateInput.min = today;
 
 // dropoffdate validation
 const dropoffDateInput = document.querySelector("#drop-off-date");
@@ -34,3 +34,92 @@ pickupDateInput.addEventListener("change", function () {
   const minimumDropffDate = date.toISOString().slice(0, 10);
   dropoffDateInput.min = minimumDropffDate;
 });
+
+// ---------- Fleet carousel ----------
+// `cars` comes from data.js (loaded before this file in index.html)
+
+const carousel = document.querySelector("#carousel");
+let currentIndex = 1; // Dzire (0) on the left, Virtus (1) in the centre, Slavia (2) on the right
+
+// Builds the HTML for ONE card. isActive = true -> big centre card, false -> small faded side card
+function createCardHTML(car, isActive) {
+  let cardClasses = "border border-gray-700 rounded-2xl overflow-hidden ";
+  let imageClasses = "";
+
+  if (isActive) {
+    // full width on phones, 50% on md screens and up
+    cardClasses += "w-full md:w-[50%]";
+    imageClasses = "object-cover";
+  } else {
+    // side cards are hidden on phones, shown from md screens and up
+    cardClasses += "hidden md:block w-[25%] h-[70%] opacity-70";
+    imageClasses = "h-52 w-full object-cover";
+  }
+
+  return `
+    <div class="${cardClasses}">
+      <img src="${car.image}" alt="${car.name}" class="${imageClasses}" />
+      <div class="flex bg-dark-secondary">
+        <div class="bg-dark-secondary w-full py-2 px-4">
+          <div>
+            <p class="text-lg font-medium">${car.name}</p>
+            <p class="text-secondary text-[13px] font-medium">${car.type}</p>
+            <p class="text-lg font-medium">
+              &#8377; ${car.price}<span class="text-secondary text-[13px] font-medium"> /day</span>
+            </p>
+          </div>
+        </div>
+        <div class="bg-dark-secondary w-full flex items-center justify-end pr-8">
+          <button>
+            <img src="assets/images/circle-arrow-right-svgrepo-com.svg" alt="" class="h-10" />
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// cars array -> currentIndex -> previous/current/next -> 3 cards -> #carousel
+function renderCarousel() {
+  let previousIndex = currentIndex - 1;
+  if (previousIndex < 0) {
+    previousIndex = cars.length - 1; // before the first car comes the last car
+  }
+
+  let nextIndex = currentIndex + 1;
+  if (nextIndex > cars.length - 1) {
+    nextIndex = 0; // after the last car comes the first car
+  }
+
+  carousel.innerHTML =
+    createCardHTML(cars[previousIndex], false) +
+    createCardHTML(cars[currentIndex], true) +
+    createCardHTML(cars[nextIndex], false);
+}
+
+// Fade out, swap the cards, fade back in (the fade itself is Tailwind's transition-opacity on #carousel)
+function updateCarousel() {
+  carousel.classList.add("opacity-0");
+  setTimeout(function () {
+    renderCarousel();
+    carousel.classList.remove("opacity-0");
+  }, 150);
+}
+
+document.querySelector("#carousel-next").addEventListener("click", function () {
+  currentIndex++;
+  if (currentIndex > cars.length - 1) {
+    currentIndex = 0;
+  }
+  updateCarousel();
+});
+
+document.querySelector("#carousel-prev").addEventListener("click", function () {
+  currentIndex--;
+  if (currentIndex < 0) {
+    currentIndex = cars.length - 1;
+  }
+  updateCarousel();
+});
+
+renderCarousel(); // first render
